@@ -1,0 +1,4 @@
+[core]
+    remote = remla2024local
+['remote "remla2024local"']
+    url = ../remote

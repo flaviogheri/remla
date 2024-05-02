@@ -87,3 +87,7 @@ target/
 
 # Mypy cache
 .mypy_cache/
+
+# Local dvc remote - to be removed entirely
+remote
+remote/
