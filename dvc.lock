@@ -5,65 +5,65 @@ stages:
     deps:
     - path: src/data/make_dataset.py
       hash: md5
-      md5: cc13bdb80e049a26936e68231ad3f022
-      size: 217
+      md5: 9c21fa7fc39eeecc14b48a5c35f32cd1
+      size: 229
     outs:
-    - path: data/test_raw
+    - path: data/raw/test_raw
       hash: md5
       md5: d41d8cd98f00b204e9800998ecf8427e
       size: 0
-    - path: data/train_raw
+    - path: data/raw/train_raw
       hash: md5
       md5: d41d8cd98f00b204e9800998ecf8427e
       size: 0
-    - path: data/val_raw
+    - path: data/raw/val_raw
       hash: md5
       md5: d41d8cd98f00b204e9800998ecf8427e
       size: 0
   build_features:
     cmd: python src/features/build_features.py
     deps:
-    - path: data/test_raw
+    - path: data/raw/test_raw
       hash: md5
       md5: d41d8cd98f00b204e9800998ecf8427e
       size: 0
-    - path: data/train_raw
+    - path: data/raw/train_raw
       hash: md5
       md5: d41d8cd98f00b204e9800998ecf8427e
       size: 0
-    - path: data/val_raw
+    - path: data/raw/val_raw
       hash: md5
       md5: d41d8cd98f00b204e9800998ecf8427e
       size: 0
     - path: src/features/build_features.py
       hash: md5
-      md5: 540c331359808a9714f5fa75e52cf307
-      size: 205
+      md5: ec6afe869a354a66264caa451de923e9
+      size: 235
     outs:
-    - path: data/test
+    - path: data/processed/test
       hash: md5
       md5: d41d8cd98f00b204e9800998ecf8427e
       size: 0
-    - path: data/train
+    - path: data/processed/train
       hash: md5
       md5: d41d8cd98f00b204e9800998ecf8427e
       size: 0
-    - path: data/val
+    - path: data/processed/val
       hash: md5
       md5: d41d8cd98f00b204e9800998ecf8427e
       size: 0
   train_model:
     cmd: python src/models/train_model.py
     deps:
-    - path: data/test
+    - path: data/processed/test
       hash: md5
       md5: d41d8cd98f00b204e9800998ecf8427e
       size: 0
-    - path: data/train
+    - path: data/processed/train
       hash: md5
       md5: d41d8cd98f00b204e9800998ecf8427e
       size: 0
-    - path: data/val
+    - path: data/processed/val
       hash: md5
       md5: d41d8cd98f00b204e9800998ecf8427e
       size: 0

@@ -1,9 +1,9 @@
 def main():
-    with open("data/train_raw","w") as f:
+    with open("data/raw/train_raw","w") as f:
         pass
-    with open("data/test_raw","w") as f:
+    with open("data/raw/test_raw","w") as f:
         pass
-    with open("data/val_raw","w") as f:
+    with open("data/raw/val_raw","w") as f:
         pass
     
 if __name__ == '__main__':

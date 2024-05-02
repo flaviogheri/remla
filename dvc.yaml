@@ -4,26 +4,26 @@ stages:
     deps:
     - src/data/make_dataset.py
     outs:
-    - data/test_raw
-    - data/train_raw
-    - data/val_raw
+    - data/raw/test_raw
+    - data/raw/train_raw
+    - data/raw/val_raw
   build_features:
     cmd: python src/features/build_features.py
     deps:
     - src/features/build_features.py
-    - data/train_raw
-    - data/test_raw
-    - data/val_raw
+    - data/raw/train_raw
+    - data/raw/test_raw
+    - data/raw/val_raw
     outs:
-    - data/train
-    - data/test
-    - data/val
+    - data/processed/train
+    - data/processed/test
+    - data/processed/val
   train_model:
     cmd: python src/models/train_model.py
     deps:
     - src/models/train_model.py
-    - data/train
-    - data/test
-    - data/val
+    - data/processed/train
+    - data/processed/test
+    - data/processed/val
     outs:
     - models/phishing_model.h5
