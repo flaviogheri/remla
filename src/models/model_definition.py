@@ -3,6 +3,10 @@
 from keras.models import Sequential
 from keras.layers import Embedding, Conv1D, MaxPooling1D, Flatten, Dense, Dropout
 
+import yaml
+
+with open("config.yml", "r") as file: 
+    config = yaml.safe_load(file)
 
 def build_model(voc_size, embedding_dim, categories):
     model = Sequential()
@@ -37,4 +41,4 @@ def build_model(voc_size, embedding_dim, categories):
     model.add(Flatten())
     model.add(Dense(len(params['categories'])-1, activation='sigmoid'))
 
-    model.compile(loss=)
+    return model
