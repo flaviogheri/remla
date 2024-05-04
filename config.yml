@@ -1,0 +1,6 @@
+# config.yml
+processed_paths:
+  train: "data/processed/train"
+  test: "data/processed/test"
+  val: "data/processed/val"
+
