@@ -1,7 +1,7 @@
 
 import numpy as np
 import yaml
-from model_defintion import build_model
+from model_definition import build_model
 
 # Load parameters and data
 with open("config.yml", "r") as file:
