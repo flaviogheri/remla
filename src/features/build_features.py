@@ -5,12 +5,15 @@ from tensorflow.keras.preprocessing.text import Tokenizer
 import yaml
 import numpy as np
 import pickle
+import os
 
 ## open config.yml
+project_directory = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+config_file = os.path.join(project_directory, "config.yml")
 
-with open("config.yml", "r") as file: 
+with open(config_file, "r") as file: 
     config = yaml.safe_load(file)
-
+'''
 training_path = config['data_paths']['training_file']
 test_path = config['data_paths']['test_file']
 val_path = config['data_paths']['val_file']
@@ -26,6 +29,13 @@ with open(test_path, "r") as test_file:
 
 with open(val_path, "r") as val_file:
     val = [line.strip() for line in val_file.readlines()]  # Assume no header
+'''
+
+### Load data
+train = [line.strip() for line in open("../data/raw/train_raw.txt", "r").readlines()[1:]]
+test = [line.strip() for line in open("../data/raw/test_raw.txt", "r").readlines()]
+val=[line.strip() for line in open("../data/raw/val_raw.txt", "r").readlines()]
+print("Succesfully loaded data")
 
 
 ### Preprocess data
@@ -38,6 +48,7 @@ raw_y_test = [line.split("\t")[0] for line in test]
 
 raw_x_val=[line.split("\t")[1] for line in val]
 raw_y_val=[line.split("\t")[0] for line in val]
+print("Succesfully preprocessed data")
 
 ## Tokenizing Dataset
 
@@ -50,12 +61,14 @@ sequence_length = config['params']['sequence_length']
 x_train = pad_sequences(tokenizer.texts_to_sequences(raw_x_train), maxlen=sequence_length)
 x_val = pad_sequences(tokenizer.texts_to_sequences(raw_x_val), maxlen=sequence_length)
 x_test = pad_sequences(tokenizer.texts_to_sequences(raw_x_test), maxlen=sequence_length)
+print("Succesfully tokenized dataset")
 
 # Encoding Labels
 encoder = LabelEncoder()
 y_train = encoder.fit_transform(raw_y_train)
 y_val = encoder.transform(raw_y_val)
 y_test = encoder.transform(raw_y_test)
+print("Succesfully encoded labels")
 
 # Save Processed data
 
@@ -63,13 +76,14 @@ def save_processed_data():
     os.makedirs("data/processed", exist_ok=True)
 
     # Save arrays
-    np.save("data/processed/x_train.npy", x_train)
-    np.save("data/processed/x_val.npy", x_val)
-    np.save("data/processed/x_test.npy", x_test)
+    np.save("../data/processed/x_train.npy", x_train)
+    np.save("../data/processed/x_val.npy", x_val)
+    np.save("../data/processed/x_test.npy", x_test)
 
-    np.save("data/processed/y_train.npy", y_train)
-    np.save("data/processed/y_val.npy", y_val)
-    np.save("data/processed/y_test.npy", y_test)
+    np.save("../data/processed/y_train.npy", y_train)
+    np.save("../data/processed/y_val.npy", y_val)
+    np.save("../data/processed/y_test.npy", y_test)
+print("Succesfully saved processed data")
 
 def main():
     save_processed_data()
