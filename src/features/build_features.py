@@ -55,6 +55,11 @@ print("Succesfully preprocessed data")
 tokenizer = Tokenizer(lower=True, char_level=True, oov_token='-n-')
 tokenizer.fit_on_texts(raw_x_train + raw_x_val + raw_x_test)
 char_index = tokenizer.word_index
+char_index_size = len(char_index)
+config['params']['char_index_size'] = char_index_size
+
+with open(config_file, "w") as file:
+    yaml.dump(config, file, default_flow_style=False)
 
 sequence_length = config['params']['sequence_length']
 

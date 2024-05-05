@@ -21,7 +21,7 @@ voc_size = params['char_index_size']
 embedding_dim = params['embedding_dimension']
 categories = params['categories']
 
-model = build_model(voc_size, embedding_dim, categories)
+model = build_model(embedding_dim, categories)
 
 # Compile the model
 model.compile(loss=params['loss_function'], optimizer=params['optimizer'], metrics=['accuracy'])

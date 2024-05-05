@@ -7,10 +7,11 @@ import yaml
 
 with open("config.yml", "r") as file: 
     config = yaml.safe_load(file)
+params = config['params']
 
-def build_model(voc_size, embedding_dim, categories):
+def build_model(embedding_dim, categories):
     model = Sequential()
-    voc_size = len(char_index.keys())
+    voc_size = config['params']['char_index_size']
     model.add(Embedding(voc_size + 1, 50))
 
     model.add(Conv1D(128, 3, activation='tanh'))

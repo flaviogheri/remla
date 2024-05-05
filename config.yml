@@ -1,24 +1,21 @@
-# config.yml
 data_paths:
-  training_file: "src/data/raw/train_raw.txt"
-  test_file: "src/data/raw/test_raw.txt"
-  val_file: "src/data/raw/val_raw.txt"
-
-processed_paths:
-  train: "src/data/processed/train"
-  test: "src/data/processed/test"
-  val: "src/data/processed/val"
-
+  test_file: src/data/raw/test_raw.txt
+  training_file: src/data/raw/train_raw.txt
+  val_file: src/data/raw/val_raw.txt
 params:
-  sequence_length: 200
-  loss_function: "binary_crossentropy"
-  optimizer: "adam"
-  batch_train: 5000
   batch_test: 5000
+  batch_train: 5000
   categories:
-    - "phishing"
-    - "legitimate"
-  char_index: null  # This will be updated after initializing the tokenizer
-  epoch: 30
+  - phishing
+  - legitimate
+  char_index_size: 71
+  dataset_dir: ../dataset/small_dataset/
   embedding_dimension: 50
-  dataset_dir: "../dataset/small_dataset/"
+  epoch: 30
+  loss_function: binary_crossentropy
+  optimizer: adam
+  sequence_length: 200
+processed_paths:
+  test: src/data/processed/test
+  train: src/data/processed/train
+  val: src/data/processed/val
