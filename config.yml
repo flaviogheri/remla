@@ -1,8 +1,8 @@
 # config.yml
 data_paths:
-  training_file: "data/raw/train_raw"
-  test_file: "data/raw/test_raw"
-  val_file: "data/raw/val_raw"
+  training_file: "data/raw/train_raw.txt"
+  test_file: "data/raw/test_raw.txt"
+  val_file: "data/raw/val_raw.txt"
 
 processed_paths:
   train: "data/processed/train"
