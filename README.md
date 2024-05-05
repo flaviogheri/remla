@@ -61,3 +61,6 @@ lint.bat
 If this does not work, you can run the following commands to run both linters separately:
 pylint src src/checkers > pylint_output.txt
 flake8 > flake8_output.txt
+
+Pylint gives a quality score. 10/10 is the best possible score.
+flake8 gives the number of issues. 0 is the best possible score.
