@@ -64,3 +64,5 @@ flake8 > flake8_output.txt
 
 Pylint gives a quality score. 10/10 is the best possible score.
 flake8 gives the number of issues. 0 is the best possible score.
+
+New pylint checkers have also been added according to common ML smells. These can be found in src/checkers.
