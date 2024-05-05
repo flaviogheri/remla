@@ -1,13 +1,13 @@
 # config.yml
 data_paths:
-  training_file: "data/raw/train_raw.txt"
-  test_file: "data/raw/test_raw.txt"
-  val_file: "data/raw/val_raw.txt"
+  training_file: "src/data/raw/train_raw.txt"
+  test_file: "src/data/raw/test_raw.txt"
+  val_file: "src/data/raw/val_raw.txt"
 
 processed_paths:
-  train: "data/processed/train"
-  test: "data/processed/test"
-  val: "data/processed/val"
+  train: "src/data/processed/train"
+  test: "src/data/processed/test"
+  val: "src/data/processed/val"
 
 params:
   sequence_length: 200

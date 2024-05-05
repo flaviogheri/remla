@@ -13,7 +13,7 @@ config_file = os.path.join(project_directory, "config.yml")
 
 with open(config_file, "r") as file: 
     config = yaml.safe_load(file)
-'''
+
 training_path = config['data_paths']['training_file']
 test_path = config['data_paths']['test_file']
 val_path = config['data_paths']['val_file']
@@ -29,12 +29,12 @@ with open(test_path, "r") as test_file:
 
 with open(val_path, "r") as val_file:
     val = [line.strip() for line in val_file.readlines()]  # Assume no header
-'''
 
+    
 ### Load data
-train = [line.strip() for line in open("../data/raw/train_raw.txt", "r").readlines()[1:]]
-test = [line.strip() for line in open("../data/raw/test_raw.txt", "r").readlines()]
-val=[line.strip() for line in open("../data/raw/val_raw.txt", "r").readlines()]
+# train = [line.strip() for line in open("../data/raw/train_raw.txt", "r").readlines()[1:]]
+# test = [line.strip() for line in open("../data/raw/test_raw.txt", "r").readlines()]
+# val=[line.strip() for line in open("../data/raw/val_raw.txt", "r").readlines()]
 print("Succesfully loaded data")
 
 
