@@ -1,7 +1,7 @@
 import astroid
-import pandas as pd
 from pylint.checkers import BaseChecker
 from pylint.interfaces import IAstroidChecker
+
 
 class NanEquivalenceChecker(BaseChecker):
     __implements__ = IAstroidChecker
@@ -9,7 +9,7 @@ class NanEquivalenceChecker(BaseChecker):
     name = 'nan-equivalence'
     msgs = {
         'W0001': (
-            'Comparison of Pandas DataFrame elements with np.nan may return False. Use .isna() for NaN comparison.',
+            'Use .isna() for NaN comparison.',
             'nan-equivalence',
             'Developers need to be careful when using the NaN comparison',
         ),
@@ -18,7 +18,7 @@ class NanEquivalenceChecker(BaseChecker):
     def visit_compare(self, node):
         if len(node.ops) > 0 and node.ops[0][0] == '==':
             if (
-                isinstance(node.left, astroid.Name) and 
+                isinstance(node.left, astroid.Name) and
                 node.left.name == 'df'
             ):
                 if (

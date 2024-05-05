@@ -2,13 +2,14 @@ import astroid
 from pylint.checkers import BaseChecker
 from pylint.interfaces import IAstroidChecker
 
+
 class EmptyColumnMisinitializationChecker(BaseChecker):
     __implements__ = IAstroidChecker
 
     name = 'empty-column-misinitialization'
     msgs = {
         'W0003': (
-            'Empty column initialization detected. Use np.nan instead of 0 or empty string.',
+            'Use np.nan instead of 0 or empty string for empty columns.',
             'empty-column-initialization',
             'Developers need to be careful when initializing empty columns',
         ),
@@ -23,7 +24,6 @@ class EmptyColumnMisinitializationChecker(BaseChecker):
             if isinstance(node.value, astroid.Const):
                 if node.value.value in [0, '']:
                     self.add_message('empty-column-initialization', node=node)
-
 
 
 def register(linter):
