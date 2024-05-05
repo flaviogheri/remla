@@ -1,9 +1,17 @@
+'''
+This checker is used to detect the comparison of NaN values in the code.
+It is recommended to use the .isna() method for NaN comparison.
+'''
+
 import astroid
 from pylint.checkers import BaseChecker
 from pylint.interfaces import IAstroidChecker
 
 
 class NanEquivalenceChecker(BaseChecker):
+    '''
+    This pylint checker will check for NaN comparison in the code.
+    '''
     __implements__ = IAstroidChecker
 
     name = 'nan-equivalence'
@@ -16,6 +24,9 @@ class NanEquivalenceChecker(BaseChecker):
     }
 
     def visit_compare(self, node):
+        '''
+        This method will check if the node is a NaN comparison operation.
+        '''
         if len(node.ops) > 0 and node.ops[0][0] == '==':
             if (
                 isinstance(node.left, astroid.Name) and
@@ -32,4 +43,7 @@ class NanEquivalenceChecker(BaseChecker):
 
 
 def register(linter):
+    '''
+    This function registers the NanEquivalenceChecker with the linter.
+    '''
     linter.register_checker(NanEquivalenceChecker(linter))

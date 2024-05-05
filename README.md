@@ -1,10 +1,8 @@
-ml_config_management
-==============================
+# ml_config_management
 
 development of pipeline management and model_training system
 
-Project Organization
-------------
+## Project Organization
 
     ├── LICENSE
     ├── Makefile           <- Makefile with commands like `make data` or `make train`
@@ -51,7 +49,15 @@ Project Organization
     │
     └── tox.ini            <- tox file with settings for running tox; see tox.readthedocs.io
 
-
---------
+---
 
 <p><small>Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>. #cookiecutterdatascience</small></p>
+
+---
+
+Both pylint and flake8 have been used as linters. To run both, run the following command:
+lint.bat
+
+If this does not work, you can run the following commands to run both linters separately:
+pylint src src/checkers > pylint_output.txt
+flake8 > flake8_output.txt

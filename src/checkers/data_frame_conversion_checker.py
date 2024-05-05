@@ -1,9 +1,19 @@
+'''
+This checker is used to detect the usage of the
+deprecated attribute `df.values` in pandas DataFrame.
+'''
+
 import astroid
 from pylint.checkers import BaseChecker
 from pylint.interfaces import IAstroidChecker
 
 
 class DataFrameConversionChecker(BaseChecker):
+    '''
+    This pylint checker will check for the usage of
+    the deprecated attribute `df.values` in pandas DataFrame.
+    '''
+
     __implements__ = IAstroidChecker
 
     name = 'dataframe-conversion'
@@ -16,6 +26,9 @@ class DataFrameConversionChecker(BaseChecker):
     }
 
     def visit_attribute(self, node):
+        '''
+        This method will check if the node is a df.values call.
+        '''
         if (isinstance(node.expr, astroid.Name) and
                 node.expr.name == 'df' and
                 node.attrname == 'values'):
@@ -23,4 +36,7 @@ class DataFrameConversionChecker(BaseChecker):
 
 
 def register(linter):
+    '''
+    This function registers the DataFrameConversionChecker with the linter.
+    '''
     linter.register_checker(DataFrameConversionChecker(linter))

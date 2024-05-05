@@ -1,9 +1,18 @@
+'''
+This checker is used to detect the misinitialization
+of empty columns in a pandas DataFrame.
+'''
+
 import astroid
 from pylint.checkers import BaseChecker
 from pylint.interfaces import IAstroidChecker
 
 
 class EmptyColumnMisinitializationChecker(BaseChecker):
+    '''
+    This pylint checker will check for the misinitialization
+    of empty columns.
+    '''
     __implements__ = IAstroidChecker
 
     name = 'empty-column-misinitialization'
@@ -16,6 +25,9 @@ class EmptyColumnMisinitializationChecker(BaseChecker):
     }
 
     def visit_assign(self, node):
+        '''
+        This method will check if the node is an empty column initialization.
+        '''
         if (
             isinstance(node.targets[0], astroid.Subscript) and
             isinstance(node.targets[0].value, astroid.Name) and
@@ -27,4 +39,8 @@ class EmptyColumnMisinitializationChecker(BaseChecker):
 
 
 def register(linter):
+    '''
+    This function registers the
+    EmptyColumnMisinitializationChecker with the linter.
+    '''
     linter.register_checker(EmptyColumnMisinitializationChecker(linter))

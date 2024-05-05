@@ -33,7 +33,7 @@ ignore-patterns=^\.#
 
 # Python code to execute, usually for sys.path manipulation such as
 # pygtk.require().
-init-hook='import sys; sys.path.append("checkers")'
+init-hook='import sys; sys.path.append("src/checkers")'
 
 # Use multiple processes to speed up Pylint. Specifying 0 will auto-detect the
 # number of processors available to use.
@@ -46,7 +46,7 @@ limit-inference-results=100
 
 # List of plugins (as comma separated values of python module names) to load,
 # usually to register additional checkers.
-load-plugins=nan_equivalence_checker,chain_indexing_checker, empty_column_misinitialization_checker, data_frame_conversion_checker
+load-plugins=nan_equivalence_checker, empty_column_misinitialization_checker, data_frame_conversion_checker
 
 # Pickle collected data for later comparisons.
 persistent=yes
