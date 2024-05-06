@@ -8,4 +8,3 @@ flake8==6.0.0
 python-dotenv>=0.5.1
 tensorflow==2.16.1
 PyYaml==6.0.1
-seaborn
