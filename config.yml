@@ -16,6 +16,15 @@ params:
   optimizer: adam
   sequence_length: 200
 processed_paths:
-  test: src/data/processed/test
-  train: src/data/processed/train
-  val: src/data/processed/val
+  model_path: models/phishing_model.keras
+  x_test: src/data/processed/x_test.npy
+  x_train: src/data/processed/x_train.npy
+  x_val: src/data/processed/x_val.npy
+  y_test: src/data/processed/y_test.npy
+  y_train: src/data/processed/y_train.npy
+  y_val: src/data/processed/y_val.npy
+report_paths:
+  accuracy_score: reports/accuracy.txt
+  classification_report: reports/classification_report.txt
+  confusion_matrix: reports/confusion_matrix.txt
+  heatmap: reports/figures/confusion_matrix_heatmap.png

@@ -24,13 +24,13 @@ os.makedirs("reports/figures", exist_ok=True)
 
 
 # Load the test data
-x_test = np.load(os.path.dirname(os.path.dirname((os.path.abspath(__file__)))) + "\\data\\processed\\x_test.npy")
-y_test = np.load(os.path.dirname(os.path.dirname((os.path.abspath(__file__)))) + "\\data\\processed\\y_test.npy")
+x_test = np.load(config["processed_paths"]["x_test"])
+y_test = np.load(config["processed_paths"]["y_test"])
 y_test = y_test.reshape(-1, 1)
 
 
 # Load the trained model
-model = load_model(os.path.dirname(os.path.dirname(os.path.dirname((os.path.abspath(__file__))))) + "\\models\\phishing_model.keras")
+model = load_model(config["processed_paths"]["model_path"])
 
 # Generate predictions
 y_pred = model.predict(x_test, batch_size=1000)
@@ -40,19 +40,19 @@ y_pred_binary = (np.array(y_pred) > 0.5).astype(int)
 
 report = classification_report(y_test, y_pred_binary)
 
-with open(os.path.dirname(os.path.dirname(os.path.dirname((os.path.abspath(__file__))))) + "\\reports\\classification_report.txt", "w") as file:
+with open(config["report_paths"]["classification_report"], "w") as file:
     file.write("Classification Report:\n")
     file.write(report)
 
 # Calculate the confusion matrix
 confusion_mat = confusion_matrix(y_test, y_pred_binary)
-with open(os.path.dirname(os.path.dirname(os.path.dirname((os.path.abspath(__file__))))) + "\\reports\\confusion_matrix.txt", "w") as file:
+with open(config["report_paths"]["confusion_matrix"], "w") as file:
     file.write("Confusion Matrix:\n")
     file.write(np.array_str(confusion_mat))
 
 # Save accuracy to a file
 accuracy = accuracy_score(y_test, y_pred_binary)
-with open(os.path.dirname(os.path.dirname(os.path.dirname((os.path.abspath(__file__))))) + "\\reports\\accuracy.txt", "w") as file:
+with open(config["report_paths"]["accuracy_score"], "w") as file:
     file.write(f"Accuracy: {accuracy}")
 
 # Visualize the confusion matrix using a heatmap
@@ -61,5 +61,5 @@ sns.heatmap(confusion_mat, annot=True, fmt="d", cmap="Blues", xticklabels=["Nega
 plt.xlabel("Predicted")
 plt.ylabel("Actual")
 plt.title("Confusion Matrix Heatmap")
-plt.savefig("reports/figures/confusion_matrix_heatmap.png")
+plt.savefig(config["report_paths"]["heatmap"])
 plt.close()

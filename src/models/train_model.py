@@ -1,7 +1,7 @@
 
 import numpy as np
 import yaml
-from models import model_definition
+import model_definition
 import os
 import time
 
@@ -15,12 +15,11 @@ with open(config_file, "r") as file:
 
 params = config['params']
 
-
 # UKNOWN HERE : Do I load data using np.load or something else !?
-x_train = np.load(os.path.dirname(os.path.dirname((os.path.abspath(__file__)))) + "\\data\\processed\\x_train.npy")
-y_train = np.load(os.path.dirname(os.path.dirname((os.path.abspath(__file__)))) + "\\data\\processed\\y_train.npy")
-x_val = np.load(os.path.dirname(os.path.dirname((os.path.abspath(__file__)))) + "\\data\\processed\\x_val.npy")
-y_val = np.load(os.path.dirname(os.path.dirname((os.path.abspath(__file__)))) + "\\data\\processed\\y_val.npy")
+x_train = np.load(config["processed_paths"]["x_train"])
+y_train = np.load(config["processed_paths"]["y_train"])
+x_val = np.load(config["processed_paths"]["x_val"])
+y_val = np.load(config["processed_paths"]["y_val"])
 
 # Build the model
 voc_size = params['char_index_size']
@@ -44,7 +43,7 @@ hist = model.fit(x_train, y_train,
 
 
 # saving of model (should this be done differently ?)
-model.save(os.path.dirname(os.path.dirname(os.path.dirname((os.path.abspath(__file__))))) + "\\models\\phishing_model.keras")
+model.save(config["processed_paths"]["model_path"])
 
 end_time = time.time()
 elapsed_time = end_time - start_time
