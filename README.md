@@ -7,7 +7,9 @@ development of pipeline management and model_training system
 
 ### How to run:
 **Step 1:** 
-Download and unzip all files to a folder of your choice
+Download and unzip all files to a folder of your choice.
+Also download and unzip the project dvc remote repository from [DRIVE](https://drive.google.com/file/d/1GY0a_DOoJeKwlM2ffvq5au2X45jPN3H5/view?usp=drive_link). Store the remote directory in the same folder as the remla folder, and import the training/testing/evaluation data using `dvc pull` from within the remla folder.
+
 **Step 2:**
 *Option 1:*
 Open folder "src". Open __init with a python editor and run the file. This will give you printed updates in your shell.
