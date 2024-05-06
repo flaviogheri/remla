@@ -3,7 +3,9 @@ import numpy as np
 import yaml
 from models import model_definition
 import os
+import time
 
+print(f"saving model in the following directory: {os.path.dirname(os.path.dirname(os.path.dirname((os.path.abspath(__file__)))))}\\models\\phishing_model.keras")
 # Load parameters and data
 project_directory = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 config_file = os.path.join(project_directory, "config.yml")
@@ -31,6 +33,7 @@ model = model_definition.build_model(embedding_dim, categories)
 model.compile(loss=params['loss_function'], optimizer=params['optimizer'], metrics=['accuracy'])
 
 
+start_time = time.time()
 
 hist = model.fit(x_train, y_train,
                 batch_size=params['batch_train'],
@@ -39,5 +42,12 @@ hist = model.fit(x_train, y_train,
                 validation_data=(x_val, y_val)
                 )
 
+
 # saving of model (should this be done differently ?)
-model.save("models/phishing_model.h5")
+model.save(os.path.dirname(os.path.dirname(os.path.dirname((os.path.abspath(__file__))))) + "\\models\\phishing_model.keras")
+
+end_time = time.time()
+elapsed_time = end_time - start_time
+minutes = int(elapsed_time // 60)
+seconds = int(elapsed_time % 60)
+print(f"Training completed in {minutes}:{seconds}")
