@@ -1,0 +1,51 @@
+stages:
+  #make_dataset:
+  #  cmd: python src/data/make_dataset.py . .
+  #  deps:
+  # - src/data/make_dataset.py
+  #  outs:
+  #  - src/data/raw/test_raw.txt
+  #  - src/data/raw/train_raw.txt
+  #  - src/data/raw/val_raw.txt
+  build_features:
+    cmd: python src/features/build_features.py
+    deps:
+    - src/features/build_features.py
+    - src/data/raw/test_raw.txt
+    - src/data/raw/train_raw.txt
+    - src/data/raw/val_raw.txt
+    outs:
+    - src/data/processed/x_train.npy
+    - src/data/processed/x_val.npy
+    - src/data/processed/x_test.npy
+    - src/data/processed/y_train.npy
+    - src/data/processed/y_val.npy
+    - src/data/processed/y_test.npy
+  train_model:
+    cmd: python src/models/train_model.py
+    params:
+    - config.yml:
+      - params
+    deps:
+    - src/models/train_model.py
+    - src/data/processed/x_train.npy
+    - src/data/processed/x_val.npy
+    - src/data/processed/x_test.npy
+    - src/data/processed/y_train.npy
+    - src/data/processed/y_val.npy
+    - src/data/processed/y_test.npy
+    outs:
+    - models/phishing_model.keras
+  predict_model:
+    cmd: python src/models/predict_model.py
+    deps:
+    - src/data/processed/x_test.npy
+    - src/data/processed/y_test.npy
+    - models/phishing_model.keras
+    outs:
+    - reports/classification_report.txt
+    - reports/confusion_matrix.txt
+    - reports/accuracy.txt
+
+
+    

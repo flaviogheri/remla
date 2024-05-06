@@ -23,33 +23,16 @@ training_path = config['data_paths']['training_file']
 test_path = config['data_paths']['test_file']
 val_path = config['data_paths']['val_file']
 
-
-# Load data using config (WIP)
-
-# with open(training_path, "r") as train_file:
-# train = [line.strip() for line in train_file.readlines()[1:]]
-
-# with open(test_path, "r") as test_file:
-# test = [line.strip() for line in test_file.readlines()]  # Assume no header
-
-# with open(val_path, "r") as val_file:
-# val = [line.strip() for line in val_file.readlines()]  # Assume no header
-
-
-train_file_path = os.path.join(path, "data", "raw", "train_raw.txt")
-test_file_path = os.path.join(path, "data", "raw", "test_raw.txt")
-val_file_path = os.path.join(path, "data", "raw", "val_raw.txt")
-
 # Load train data
-with open(train_file_path, "r") as train_file:
+with open(training_path, "r") as train_file:
     train = [line.strip() for line in train_file.readlines()[1:]]
 
 # Load test data
-with open(test_file_path, "r") as test_file:
+with open(test_path, "r") as test_file:
     test = [line.strip() for line in test_file.readlines()]
 
 # Load validation data
-with open(val_file_path, "r") as val_file:
+with open(val_path, "r") as val_file:
     val = [line.strip() for line in val_file.readlines()]
 
 # Preprocess data
@@ -95,33 +78,14 @@ processed_data_directory = os.path.join(project_directory, "data", "processed")
 os.makedirs(processed_data_directory, exist_ok=True)
 
 # Save arrays
-np.save(os.path.join(processed_data_directory, "x_train.npy"), x_train)
-np.save(os.path.join(processed_data_directory, "x_val.npy"), x_val)
-np.save(os.path.join(processed_data_directory, "x_test.npy"), x_test)
+np.save(config["processed_paths"]["x_train"], x_train)
+np.save(config["processed_paths"]["x_val"], x_val)
+np.save(config["processed_paths"]["x_test"], x_test)
 
-np.save(os.path.join(processed_data_directory, "y_train.npy"), y_train)
-np.save(os.path.join(processed_data_directory, "y_val.npy"), y_val)
-np.save(os.path.join(processed_data_directory, "y_test.npy"), y_test)
+np.save(config["processed_paths"]["y_train"], y_train)
+np.save(config["processed_paths"]["y_val"], y_val)
+np.save(config["processed_paths"]["y_test"], y_test)
 print("Successfully saved processed data")
-
-
-# # Save Processed data
-# def save_processed_data():
-#     project_directory = os.path.dirname(path)
-
-#     # Create the directory if it doesn't exist
-#     processed_data_directory = os.path.join(project_directory, "data", "processed")
-#     os.makedirs(processed_data_directory, exist_ok=True)
-
-#     # Save arrays
-#     np.save(os.path.join(processed_data_directory, "x_train.npy"), x_train)
-#     np.save(os.path.join(processed_data_directory, "x_val.npy"), x_val)
-#     np.save(os.path.join(processed_data_directory, "x_test.npy"), x_test)
-
-#     np.save(os.path.join(processed_data_directory, "y_train.npy"), y_train)
-#     np.save(os.path.join(processed_data_directory, "y_val.npy"), y_val)
-#     np.save(os.path.join(processed_data_directory, "y_test.npy"), y_test)
-#     print("Successfully saved processed data")
 
 # def main():
 #     save_processed_data()

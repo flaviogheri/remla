@@ -1,0 +1,125 @@
+schema: '2.0'
+stages:
+  build_features:
+    cmd: python src/features/build_features.py
+    deps:
+    - path: src/data/raw/test_raw.txt
+      hash: md5
+      md5: a1cab28ad8554fd9269d31e5708469d0
+      size: 32724891
+    - path: src/data/raw/train_raw.txt
+      hash: md5
+      md5: 13fd241a41370119612d5b00b0433009
+      size: 93921671
+    - path: src/data/raw/val_raw.txt
+      hash: md5
+      md5: 7b1e28b1e91582c6f36e85517c3cc6ee
+      size: 46258330
+    - path: src/features/build_features.py
+      hash: md5
+      md5: 15f1956fa0431af2185591a3f6e34e52
+      size: 3190
+    outs:
+    - path: src/data/processed/x_test.npy
+      hash: md5
+      md5: 93675aba9e6e2c9b80277481652f0f7d
+      size: 291359328
+    - path: src/data/processed/x_train.npy
+      hash: md5
+      md5: d81af1c35a77cdeac4d8ccee76cc939e
+      size: 836619328
+    - path: src/data/processed/x_val.npy
+      hash: md5
+      md5: 6cf90ab489d52d04b2b739d1648378c9
+      size: 412064128
+    - path: src/data/processed/y_test.npy
+      hash: md5
+      md5: 2e2044626c9afab7c7d378dc3814ba8a
+      size: 2913720
+    - path: src/data/processed/y_train.npy
+      hash: md5
+      md5: 9b660634af0db95a6e2932208bc73b91
+      size: 8366320
+    - path: src/data/processed/y_val.npy
+      hash: md5
+      md5: e024823c3485bb493e855fbfdd4f452e
+      size: 4120768
+  train_model:
+    cmd: python src/models/train_model.py
+    deps:
+    - path: src/data/processed/x_test.npy
+      hash: md5
+      md5: 93675aba9e6e2c9b80277481652f0f7d
+      size: 291359328
+    - path: src/data/processed/x_train.npy
+      hash: md5
+      md5: d81af1c35a77cdeac4d8ccee76cc939e
+      size: 836619328
+    - path: src/data/processed/x_val.npy
+      hash: md5
+      md5: 6cf90ab489d52d04b2b739d1648378c9
+      size: 412064128
+    - path: src/data/processed/y_test.npy
+      hash: md5
+      md5: 2e2044626c9afab7c7d378dc3814ba8a
+      size: 2913720
+    - path: src/data/processed/y_train.npy
+      hash: md5
+      md5: 9b660634af0db95a6e2932208bc73b91
+      size: 8366320
+    - path: src/data/processed/y_val.npy
+      hash: md5
+      md5: e024823c3485bb493e855fbfdd4f452e
+      size: 4120768
+    - path: src/models/train_model.py
+      hash: md5
+      md5: 8a1d5ac773ea3f16837771daa41148ab
+      size: 1682
+    params:
+      config.yml:
+        params:
+          batch_test: 5000
+          batch_train: 5000
+          categories:
+          - phishing
+          - legitimate
+          char_index_size: 71
+          dataset_dir: ../dataset/small_dataset/
+          embedding_dimension: 50
+          epoch: 1
+          loss_function: binary_crossentropy
+          optimizer: adam
+          sequence_length: 200
+    outs:
+    - path: models/phishing_model.keras
+      hash: md5
+      md5: 4f9fcb0d2be250ac1e73a2b3117afac3
+      size: 5472435
+  predict_model:
+    cmd: python src/models/predict_model.py
+    deps:
+    - path: models/phishing_model.keras
+      hash: md5
+      md5: 4f9fcb0d2be250ac1e73a2b3117afac3
+      size: 5472435
+    - path: src/data/processed/x_test.npy
+      hash: md5
+      md5: 93675aba9e6e2c9b80277481652f0f7d
+      size: 291359328
+    - path: src/data/processed/y_test.npy
+      hash: md5
+      md5: 2e2044626c9afab7c7d378dc3814ba8a
+      size: 2913720
+    outs:
+    - path: reports/accuracy.txt
+      hash: md5
+      md5: 81952df78ee3983edab8b3818a8fdf1f
+      size: 28
+    - path: reports/classification_report.txt
+      hash: md5
+      md5: 9f46f142a4603c73c8d2caa0bbc88756
+      size: 349
+    - path: reports/confusion_matrix.txt
+      hash: md5
+      md5: aba21447d935e152f70fbd78af39c8e1
+      size: 52

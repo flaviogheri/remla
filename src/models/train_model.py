@@ -4,11 +4,11 @@ The model is saved in the models directory.
 '''
 
 import os
-import time
-
 import numpy as np
 import yaml
-from models import model_definition
+import model_definition
+import os
+import time
 
 path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 project_directory = os.path.dirname(path)
@@ -22,12 +22,13 @@ with open(config_file, "r") as file:
 
 params = config['params']
 
-# Load data
 data_directory = os.path.join(project_directory, "data", "processed")
-x_train = np.load(os.path.join(data_directory, "x_train.npy"))
-y_train = np.load(os.path.join(data_directory, "y_train.npy"))
-x_val = np.load(os.path.join(data_directory, "x_val.npy"))
-y_val = np.load(os.path.join(data_directory, "y_val.npy"))
+
+# Load data
+x_train = np.load(config["processed_paths"]["x_train"])
+y_train = np.load(config["processed_paths"]["y_train"])
+x_val = np.load(config["processed_paths"]["x_val"])
+y_val = np.load(config["processed_paths"]["y_val"])
 
 # Build the model
 voc_size = params['char_index_size']
@@ -42,14 +43,15 @@ model.compile(loss=params['loss_function'], optimizer=params['optimizer'], metri
 start_time = time.time()
 
 hist = model.fit(x_train, y_train,
-                 batch_size=params['batch_train'],
-                 epochs=params['epoch'],
-                 shuffle=True,
-                 validation_data=(x_val, y_val)
-                 )
+                batch_size=params['batch_train'],
+                epochs=params['epoch'],
+                shuffle=True,
+                validation_data=(x_val, y_val)
+                )
 
-# Save the model
-model.save(model_directory)
+
+# saving of model (should this be done differently ?)
+model.save(config["processed_paths"]["model_path"])
 
 end_time = time.time()
 elapsed_time = end_time - start_time
