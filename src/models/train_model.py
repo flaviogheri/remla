@@ -1,21 +1,30 @@
+'''
+This script trains the model using the data generated in the previous step.
+The model is saved in the models directory.
+'''
 
+import os
 import numpy as np
 import yaml
 import model_definition
 import os
 import time
 
-print(f"saving model in the following directory: {os.path.dirname(os.path.dirname(os.path.dirname((os.path.abspath(__file__)))))}\\models\\phishing_model.keras")
+path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+project_directory = os.path.dirname(path)
+model_directory = os.path.join(project_directory, "models", "phishing_model.keras")
+print(f"saving model in the following directory: {model_directory}")
+
 # Load parameters and data
-project_directory = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 config_file = os.path.join(project_directory, "config.yml")
-#print(config_file)
-with open(config_file, "r") as file: 
+with open(config_file, "r") as file:
     config = yaml.safe_load(file)
 
 params = config['params']
 
-# UKNOWN HERE : Do I load data using np.load or something else !?
+data_directory = os.path.join(project_directory, "data", "processed")
+
+# Load data
 x_train = np.load(config["processed_paths"]["x_train"])
 y_train = np.load(config["processed_paths"]["y_train"])
 x_val = np.load(config["processed_paths"]["x_val"])
@@ -26,11 +35,10 @@ voc_size = params['char_index_size']
 embedding_dim = params['embedding_dimension']
 categories = params['categories']
 
-model = model_definition.build_model(embedding_dim, categories)
+model = model_definition.build_model()
 
 # Compile the model
 model.compile(loss=params['loss_function'], optimizer=params['optimizer'], metrics=['accuracy'])
-
 
 start_time = time.time()
 

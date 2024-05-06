@@ -1,5 +1,4 @@
-ml_config_management
-==============================
+# ml_config_management
 
 development of pipeline management and model_training system
 
@@ -7,14 +6,20 @@ development of pipeline management and model_training system
 
 ### How to run:
 **Step 1:** 
+
 Download and unzip all files to a folder of your choice.
 Also download and unzip the project dvc remote repository from [DRIVE](https://drive.google.com/file/d/1GY0a_DOoJeKwlM2ffvq5au2X45jPN3H5/view?usp=drive_link). Store the remote directory in the same folder as the remla folder, and import the training/testing/evaluation data using `dvc pull` from within the remla folder.
-
 **Step 2:**
+
 *Option 1:*
+
 Open folder "src". Open __init with a python editor and run the file. This will give you printed updates in your shell.
+
 *Option 2:*
-Open folder "src" and run __init. This will run the file through the command terminal.
+
+Open folder "src" and run __init. This will run the file in a command terminal.
+
+
 **Step 3:** 
 Analyze results in *../remla/reports* and *../remla/reports/figures*
 
@@ -34,7 +39,7 @@ Analyze results in *../remla/reports* and *../remla/reports/figures*
 # make_dataset.py
 *This script creates and downloads the dataset from a cloud service. Due to our DVC setup currently not in use*
 
-Project Organization
+# Project Organization
 ------------
 
     ├── LICENSE
@@ -82,7 +87,20 @@ Project Organization
     │
     └── tox.ini            <- tox file with settings for running tox; see tox.readthedocs.io
 
-
---------
+---
 
 <p><small>Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>. #cookiecutterdatascience</small></p>
+
+# Running the linter
+
+Both pylint and flake8 have been used as linters. To run both, run the following command:
+lint.bat
+
+If this does not work, you can run the following commands to run both linters separately:
+pylint src src/checkers > pylint_output.txt
+flake8 > flake8_output.txt
+
+Pylint gives a quality score. 10/10 is the best possible score.
+flake8 gives the number of issues. 0 is the best possible score.
+
+New pylint checkers have also been added according to common ML smells. These can be found in src/checkers.
