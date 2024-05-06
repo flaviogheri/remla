@@ -8,11 +8,19 @@ development of pipeline management and model_training system
 ### How to run:
 **Step 1:** 
 Download and unzip all files to a folder of your choice
+
+
 **Step 2:**
+
 *Option 1:*
+
 Open folder "src". Open __init with a python editor and run the file. This will give you printed updates in your shell.
+
 *Option 2:*
-Open folder "src" and run __init. This will run the file through the command terminal.
+
+Open folder "src" and run __init. This will run the file in a command terminal.
+
+
 **Step 3:** 
 Analyze results in *../remla/reports* and *../remla/reports/figures*
 
