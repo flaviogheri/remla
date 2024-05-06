@@ -90,7 +90,9 @@ disable=raw-checker-failed,
         suppressed-message,
         useless-suppression,
         deprecated-pragma,
-        use-symbolic-message-instead
+        use-symbolic-message-instead,
+        # duplicate-code is disabled as it flagged empty lines
+        duplicate-code,
 
 # Enable the message, report, category or checker with the given id(s). You can
 # either give multiple identifier separated by comma (,) or put this option
@@ -390,7 +392,7 @@ contextmanager-decorators=contextlib.contextmanager
 # List of members which are set dynamically and missed by pylint inference
 # system, and so shouldn't trigger E1101 when accessed. Python regular
 # expressions are accepted.
-generated-members=
+generated-members=os
 
 # Tells whether missing members accessed in mixin class should be ignored. A
 # class is considered mixin if its name matches the mixin-class-rgx option.

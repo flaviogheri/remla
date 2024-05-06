@@ -1,19 +1,29 @@
+'''
+This file contains the model definition.
+The model is a Convolutional Neural Network (CNN) with multiple Conv1D layers.
+'''
+
 # src/models/model_definition.py
 
-from keras.models import Sequential
-from keras.layers import Embedding, Conv1D, MaxPooling1D, Flatten, Dense, Dropout
+import os
+
+from keras.api.models import Sequential
+from keras.api.layers import Embedding, Conv1D, MaxPooling1D, Flatten, Dense, Dropout
 
 import yaml
-import os
 
 project_directory = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 config_file = os.path.join(project_directory, "config.yml")
-#print(config_file)
-with open(config_file, "r") as file: 
+# print(config_file)
+with open(config_file, "r") as file:
     config = yaml.safe_load(file)
 params = config['params']
 
-def build_model(embedding_dim, categories):
+
+def build_model():
+    '''
+    This function builds the model.
+    '''
     model = Sequential()
     voc_size = config['params']['char_index_size']
     model.add(Embedding(voc_size + 1, 50))

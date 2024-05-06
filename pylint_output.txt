@@ -1,9 +1,4 @@
-************* Module src.data.make_dataset
-src\data\make_dataset.py:20:9: W0613: Unused argument 'input_filepath' (unused-argument)
-src\data\make_dataset.py:20:25: W0613: Unused argument 'output_filepath' (unused-argument)
-src\data\make_dataset.py:39:4: E1120: No value for argument 'input_filepath' in function call (no-value-for-parameter)
-src\data\make_dataset.py:39:4: E1120: No value for argument 'output_filepath' in function call (no-value-for-parameter)
 
-------------------------------------------------------------------
-Your code has been rated at 7.74/10 (previous run: 7.74/10, +0.00)
+-------------------------------------------------------------------
+Your code has been rated at 10.00/10 (previous run: 5.58/10, +4.42)
 
