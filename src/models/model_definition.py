@@ -4,8 +4,12 @@ from keras.models import Sequential
 from keras.layers import Embedding, Conv1D, MaxPooling1D, Flatten, Dense, Dropout
 
 import yaml
+import os
 
-with open("config.yml", "r") as file: 
+project_directory = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+config_file = os.path.join(project_directory, "config.yml")
+#print(config_file)
+with open(config_file, "r") as file: 
     config = yaml.safe_load(file)
 params = config['params']
 
