@@ -31,11 +31,22 @@ val_path = config['data_paths']['val_file']
 #    val = [line.strip() for line in val_file.readlines()]  # Assume no header
 
     
-### Load data using OS
-train = [line.strip() for line in open(os.path.dirname(os.path.dirname((os.path.abspath(__file__)))) + "\\data\\raw\\train_raw.txt", "r").readlines()[1:]]
-test = [line.strip() for line in open(os.path.dirname(os.path.dirname((os.path.abspath(__file__)))) + "\\data\\raw\\test_raw.txt", "r").readlines()]
-val=[line.strip() for line in open(os.path.dirname(os.path.dirname((os.path.abspath(__file__)))) + "\\data\\raw\\val_raw.txt", "r").readlines()]
-print("Succesfully loaded data")
+train_file_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "raw", "train_raw.txt")
+test_file_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "raw", "test_raw.txt")
+val_file_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "raw", "val_raw.txt")
+
+# Load train data
+with open(train_file_path, "r") as train_file:
+    train = [line.strip() for line in train_file.readlines()[1:]]
+
+# Load test data
+with open(test_file_path, "r") as test_file:
+    test = [line.strip() for line in test_file.readlines()]
+
+# Load validation data
+with open(val_file_path, "r") as val_file:
+    val = [line.strip() for line in val_file.readlines()]
+
 
 
 ### Preprocess data
@@ -75,24 +86,43 @@ y_val = encoder.transform(raw_y_val)
 y_test = encoder.transform(raw_y_test)
 print("Succesfully encoded labels")
 
-# Save Processed data
+project_directory = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-def save_processed_data():
-    os.makedirs("data/processed", exist_ok=True)
+# Create the directory if it doesn't exist
+processed_data_directory = os.path.join(project_directory, "data", "processed")
+os.makedirs(processed_data_directory, exist_ok=True)
 
-    # Save arrays
-    np.save(os.path.dirname(os.path.dirname((os.path.abspath(__file__)))) + "\\data\\processed\\x_train.npy", x_train)
-    #print(os.path.dirname(os.path.dirname((os.path.abspath(__file__)))) + "\\data\\processed\\x_train.npy")
-    np.save(os.path.dirname(os.path.dirname((os.path.abspath(__file__)))) + "\\data\\processed\\x_val.npy", x_val)
-    np.save(os.path.dirname(os.path.dirname((os.path.abspath(__file__)))) + "\\data\\processed\\x_test.npy", x_test)
+# Save arrays
+np.save(os.path.join(processed_data_directory, "x_train.npy"), x_train)
+np.save(os.path.join(processed_data_directory, "x_val.npy"), x_val)
+np.save(os.path.join(processed_data_directory, "x_test.npy"), x_test)
 
-    np.save(os.path.dirname(os.path.dirname((os.path.abspath(__file__)))) + "\\data\\processed\\y_train.npy", y_train)
-    np.save(os.path.dirname(os.path.dirname((os.path.abspath(__file__)))) + "\\data\\processed\\y_val.npy", y_val)
-    np.save(os.path.dirname(os.path.dirname((os.path.abspath(__file__)))) + "\\data\\processed\\y_test.npy", y_test)
-print("Succesfully saved processed data")
+np.save(os.path.join(processed_data_directory, "y_train.npy"), y_train)
+np.save(os.path.join(processed_data_directory, "y_val.npy"), y_val)
+np.save(os.path.join(processed_data_directory, "y_test.npy"), y_test)
+print("Successfully saved processed data")
 
-def main():
-    save_processed_data()
 
-if __name__ == '__main__':
-    main()
+# # Save Processed data
+# def save_processed_data():
+#     project_directory = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+#     # Create the directory if it doesn't exist
+#     processed_data_directory = os.path.join(project_directory, "data", "processed")
+#     os.makedirs(processed_data_directory, exist_ok=True)
+
+#     # Save arrays
+#     np.save(os.path.join(processed_data_directory, "x_train.npy"), x_train)
+#     np.save(os.path.join(processed_data_directory, "x_val.npy"), x_val)
+#     np.save(os.path.join(processed_data_directory, "x_test.npy"), x_test)
+
+#     np.save(os.path.join(processed_data_directory, "y_train.npy"), y_train)
+#     np.save(os.path.join(processed_data_directory, "y_val.npy"), y_val)
+#     np.save(os.path.join(processed_data_directory, "y_test.npy"), y_test)
+#     print("Successfully saved processed data")
+
+# def main():
+#     save_processed_data()
+
+# if __name__ == '__main__':
+#     main()
