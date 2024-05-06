@@ -1,16 +1,23 @@
-import numpy as np
-import yaml
-from models import model_definition
+'''
+This script trains the model using the data generated in the previous step.
+The model is saved in the models directory.
+'''
+
 import os
 import time
 
-project_directory = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+import numpy as np
+import yaml
+from models import model_definition
+
+path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+project_directory = os.path.dirname(path)
 model_directory = os.path.join(project_directory, "models", "phishing_model.keras")
 print(f"saving model in the following directory: {model_directory}")
 
 # Load parameters and data
 config_file = os.path.join(project_directory, "config.yml")
-with open(config_file, "r") as file: 
+with open(config_file, "r") as file:
     config = yaml.safe_load(file)
 
 params = config['params']
@@ -27,7 +34,7 @@ voc_size = params['char_index_size']
 embedding_dim = params['embedding_dimension']
 categories = params['categories']
 
-model = model_definition.build_model(embedding_dim, categories)
+model = model_definition.build_model()
 
 # Compile the model
 model.compile(loss=params['loss_function'], optimizer=params['optimizer'], metrics=['accuracy'])
@@ -35,11 +42,11 @@ model.compile(loss=params['loss_function'], optimizer=params['optimizer'], metri
 start_time = time.time()
 
 hist = model.fit(x_train, y_train,
-                batch_size=params['batch_train'],
-                epochs=params['epoch'],
-                shuffle=True,
-                validation_data=(x_val, y_val)
-                )
+                 batch_size=params['batch_train'],
+                 epochs=params['epoch'],
+                 shuffle=True,
+                 validation_data=(x_val, y_val)
+                 )
 
 # Save the model
 model.save(model_directory)

@@ -1,3 +1,8 @@
+'''
+This script loads the trained model and the test data, generates predictions,
+and evaluates the model using classification metrics.
+'''
+
 # models/predict_model.py
 
 import os
@@ -7,18 +12,19 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
-from tensorflow.keras.models import load_model
+from keras.api.models import load_model
 
+path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Load parameters and data
-project_directory = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+project_directory = os.path.dirname(path)
 config_file = os.path.join(project_directory, "config.yml")
-#print(config_file)
-with open(config_file, "r") as file: 
+# print(config_file)
+with open(config_file, "r") as file:
     config = yaml.safe_load(file)
 
 
-# Check if figures directories exist: 
+# Check if figures directories exist:
 os.makedirs("reports", exist_ok=True)
 os.makedirs("reports/figures", exist_ok=True)
 
@@ -28,12 +34,9 @@ x_test = np.load(os.path.join(project_directory, "data", "processed", "x_test.np
 y_test = np.load(os.path.join(project_directory, "data", "processed", "y_test.npy"))
 y_test = y_test.reshape(-1, 1)
 
-
-
 # Load the trained model
 model_path = os.path.join(project_directory, "models", "phishing_model.keras")
 model = load_model(model_path)
-
 
 # Generate predictions
 y_pred = model.predict(x_test, batch_size=1000)
@@ -60,10 +63,11 @@ with open(os.path.join(project_directory, "reports", "confusion_matrix.txt"), "w
 accuracy = accuracy_score(y_test, y_pred_binary)
 with open(os.path.join(project_directory, "reports", "accuracy.txt"), "w") as file:
     file.write(f"Accuracy: {accuracy}")
-    
+
 # Visualize the confusion matrix using a heatmap
 plt.figure(figsize=(8, 6))
-sns.heatmap(confusion_mat, annot=True, fmt="d", cmap="Blues", xticklabels=["Negative", "Positive"], yticklabels=["Negative", "Positive"])
+sns.heatmap(confusion_mat, annot=True, fmt="d", cmap="Blues",
+            xticklabels=["Negative", "Positive"], yticklabels=["Negative", "Positive"])
 plt.xlabel("Predicted")
 plt.ylabel("Actual")
 plt.title("Confusion Matrix Heatmap")

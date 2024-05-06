@@ -1,17 +1,22 @@
+'''
+This file is used to preprocess the data before training the model.
+'''
+
+import os
+
 from sklearn.preprocessing import LabelEncoder
-from tensorflow.keras.preprocessing.sequence import pad_sequences
-from tensorflow.keras.preprocessing.text import Tokenizer
+from keras.api.preprocessing.sequence import pad_sequences
+from keras._tf_keras.keras.preprocessing.text import Tokenizer
 
 import yaml
 import numpy as np
-import pickle
-import os
 
-## open config.yml
-project_directory = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+# open config.yml
+path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+project_directory = os.path.dirname(path)
 config_file = os.path.join(project_directory, "config.yml")
 
-with open(config_file, "r") as file: 
+with open(config_file, "r") as file:
     config = yaml.safe_load(file)
 
 training_path = config['data_paths']['training_file']
@@ -19,21 +24,21 @@ test_path = config['data_paths']['test_file']
 val_path = config['data_paths']['val_file']
 
 
-### Load data using config (WIP)
+# Load data using config (WIP)
 
-#with open(training_path, "r") as train_file:
-#    train = [line.strip() for line in train_file.readlines()[1:]]
+# with open(training_path, "r") as train_file:
+# train = [line.strip() for line in train_file.readlines()[1:]]
 
-#with open(test_path, "r") as test_file:
-#    test = [line.strip() for line in test_file.readlines()]  # Assume no header
+# with open(test_path, "r") as test_file:
+# test = [line.strip() for line in test_file.readlines()]  # Assume no header
 
-#with open(val_path, "r") as val_file:
-#    val = [line.strip() for line in val_file.readlines()]  # Assume no header
+# with open(val_path, "r") as val_file:
+# val = [line.strip() for line in val_file.readlines()]  # Assume no header
 
-    
-train_file_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "raw", "train_raw.txt")
-test_file_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "raw", "test_raw.txt")
-val_file_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "raw", "val_raw.txt")
+
+train_file_path = os.path.join(path, "data", "raw", "train_raw.txt")
+test_file_path = os.path.join(path, "data", "raw", "test_raw.txt")
+val_file_path = os.path.join(path, "data", "raw", "val_raw.txt")
 
 # Load train data
 with open(train_file_path, "r") as train_file:
@@ -47,21 +52,18 @@ with open(test_file_path, "r") as test_file:
 with open(val_file_path, "r") as val_file:
     val = [line.strip() for line in val_file.readlines()]
 
-
-
-### Preprocess data
-
+# Preprocess data
 raw_x_train = [line.split("\t")[1] for line in train]
 raw_y_train = [line.split("\t")[0] for line in train]
 
 raw_x_test = [line.split("\t")[1] for line in test]
 raw_y_test = [line.split("\t")[0] for line in test]
 
-raw_x_val=[line.split("\t")[1] for line in val]
-raw_y_val=[line.split("\t")[0] for line in val]
+raw_x_val = [line.split("\t")[1] for line in val]
+raw_y_val = [line.split("\t")[0] for line in val]
 print("Succesfully preprocessed data")
 
-## Tokenizing Dataset
+# Tokenizing Dataset
 
 tokenizer = Tokenizer(lower=True, char_level=True, oov_token='-n-')
 tokenizer.fit_on_texts(raw_x_train + raw_x_val + raw_x_test)
@@ -86,7 +88,7 @@ y_val = encoder.transform(raw_y_val)
 y_test = encoder.transform(raw_y_test)
 print("Succesfully encoded labels")
 
-project_directory = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+project_directory = os.path.dirname(path)
 
 # Create the directory if it doesn't exist
 processed_data_directory = os.path.join(project_directory, "data", "processed")
@@ -105,7 +107,7 @@ print("Successfully saved processed data")
 
 # # Save Processed data
 # def save_processed_data():
-#     project_directory = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+#     project_directory = os.path.dirname(path)
 
 #     # Create the directory if it doesn't exist
 #     processed_data_directory = os.path.join(project_directory, "data", "processed")

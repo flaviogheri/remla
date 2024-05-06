@@ -1,5 +1,4 @@
-ml_config_management
-==============================
+# ml_config_management
 
 development of pipeline management and model_training system
 
@@ -40,7 +39,7 @@ Analyze results in *../remla/reports* and *../remla/reports/figures*
 # make_dataset.py
 *This script creates and downloads the dataset from a cloud service. Due to our DVC setup currently not in use*
 
-Project Organization
+# Project Organization
 ------------
 
     ├── LICENSE
@@ -88,7 +87,20 @@ Project Organization
     │
     └── tox.ini            <- tox file with settings for running tox; see tox.readthedocs.io
 
-
---------
+---
 
 <p><small>Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>. #cookiecutterdatascience</small></p>
+
+# Running the linter
+
+Both pylint and flake8 have been used as linters. To run both, run the following command:
+lint.bat
+
+If this does not work, you can run the following commands to run both linters separately:
+pylint src src/checkers > pylint_output.txt
+flake8 > flake8_output.txt
+
+Pylint gives a quality score. 10/10 is the best possible score.
+flake8 gives the number of issues. 0 is the best possible score.
+
+New pylint checkers have also been added according to common ML smells. These can be found in src/checkers.
