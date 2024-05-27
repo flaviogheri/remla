@@ -10,3 +10,5 @@ tensorflow==2.16.1
 PyYaml==6.0.1
 pylint==2.13.0
 seaborn
+pytest
+remlapreprocesspy==2.0.0
