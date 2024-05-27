@@ -104,3 +104,17 @@ Pylint gives a quality score. 10/10 is the best possible score.
 flake8 gives the number of issues. 0 is the best possible score.
 
 New pylint checkers have also been added according to common ML smells. These can be found in src/checkers.
+
+
+# Testing of model 
+
+Tests are deployed through pytest by running the shell script ```run_tests.sh``` through
+```
+./run_tests.sh
+```
+alternatively through running pytest directly through
+```
+pytest tests/
+```
+from the directory root.
+Please note that model.predict is quite slow, finding a way to quicken it is on the TODO. This means that the test may take a while.
