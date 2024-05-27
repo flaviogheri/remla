@@ -17,8 +17,8 @@ stages:
       size: 46258330
     - path: src/features/build_features.py
       hash: md5
-      md5: 0f5fc64b52c6afe5910c7917f800379e
-      size: 3046
+      md5: 15f1956fa0431af2185591a3f6e34e52
+      size: 3190
     outs:
     - path: src/data/processed/x_test.npy
       hash: md5
@@ -73,8 +73,8 @@ stages:
       size: 4120768
     - path: src/models/train_model.py
       hash: md5
-      md5: d5c97441ebccc2cc4d696d4564588c9e
-      size: 3015
+      md5: 8a1d5ac773ea3f16837771daa41148ab
+      size: 1682
     params:
       config.yml:
         params:
@@ -86,14 +86,14 @@ stages:
           char_index_size: 71
           dataset_dir: ../dataset/small_dataset/
           embedding_dimension: 50
-          epoch: 30
+          epoch: 1
           loss_function: binary_crossentropy
           optimizer: adam
           sequence_length: 200
     outs:
     - path: models/phishing_model.keras
       hash: md5
-      md5: f2f8548595a933c9027732a552d72f8a
+      md5: 4f9fcb0d2be250ac1e73a2b3117afac3
       size: 5472435
   predict_model:
     cmd: python src/models/predict_model.py
