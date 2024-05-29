@@ -12,3 +12,4 @@ pylint==2.13.0
 seaborn
 pytest
 remlapreprocesspy==2.0.0
+gdown==5.2.0
