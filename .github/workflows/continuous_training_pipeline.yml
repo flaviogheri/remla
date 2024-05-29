@@ -28,9 +28,9 @@ jobs:
       run: mkdir -p ../dvc_pull_directory
     - name: Download and unzip file from Google Drive
       run: |        
-        wget --no-check-certificate "https://drive.google.com/file/d/1GY0a_DOoJeKwlM2ffvq5au2X45jPN3H5/view?usp=drive_link" -O /tmp/remote.zip
-        unzip /tmp/remote.zip -d ../dvc_pull_directory
-        rm /tmp/remote.zip
+        gdown --id 1GY0a_DOoJeKwlM2ffvq5au2X45jPN3H5
+        unzip remote.zip -d ../dvc_pull_directory
+        rm remote.zip
     # - name: Training
     #   run: |
     #     run the training code
