@@ -34,7 +34,7 @@ jobs:
     - name: Set up DVC and pull data
       run: |
         python -m pip install dvc
-        dvc pull
+        dvc pull --force
     - name: Test
       run: |
         ./run_tests.sh
