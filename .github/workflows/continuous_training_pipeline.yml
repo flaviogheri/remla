@@ -24,13 +24,9 @@ jobs:
       run: |
         mkdir -p project_folder
         cd project_folder
-        file_id="1GY0a_DOoJeKwlM2ffvq5au2X45jPN3H5"
-        file_name="dvc_remote.zip"
-        curl -sc /tmp/gcookie "https://drive.google.com/uc?export=download&id=${file_id}" > /dev/null
-        code="$(awk '/_warning_/ {print $NF}' /tmp/gcookie)"
-        curl -Lb /tmp/gcookie "https://drive.google.com/uc?export=download&confirm=${code}&id=${file_id}" -o ${file_name}
-        unzip ${file_name}
-        rm ${file_name}
+        curl -L -o remote.zip "https://drive.google.com/uc?export=download&id=1GY0a_DOoJeKwlM2ffvq5au2X45jPN3H5"
+        unzip remote.zip
+        rm remote.zip
     - name: Set up DVC and pull data
       run: |
         python -m pip install dvc
