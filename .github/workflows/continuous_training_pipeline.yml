@@ -29,7 +29,7 @@ jobs:
     - name: Download and unzip file from Google Drive
       run: |        
         gdown --id 1dZse5BAIgpe1UPU4w9-3OAdplTIP34_C -O remote.zip
-        unzip remote.zip -d ../remote
+        unzip remote.zip -d ../
         rm remote.zip
     - name: Set up DVC and pull data
       run: |
