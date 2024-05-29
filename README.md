@@ -27,11 +27,11 @@ Analyze results in *../remla/reports* and *../remla/reports/figures*
 # build_features.py
 *This script loads text data from files specified in a YAML configuration file or through direct file paths, preprocesses the data by tokenizing and padding sequences, encodes labels, and then saves the processed data into numpy arrays.*
 
-# train_model.py
-*This script loads data, builds and trains the phishing detection model using a neural network defined in model_definition, and then saves the trained model.*
-
 # model_definition.py
 *This script defines a function build_model that constructs a convolutional neural network (CNN) model for text classification using Keras. The architecture includes several convolutional layers with different kernel sizes, max pooling layers, dropout layers, and a final dense layer for classification. The model is configured based on parameters loaded from a YAML configuration file.*
+
+# train_model.py
+*This script loads data, builds and trains the phishing detection model using a neural network defined in model_definition, and then saves the trained model.*
 
 # predict_model.py
 *This script loads a trained neural network model for phishing detection, evaluates its performance on test data, generates a classification report, confusion matrix, and accuracy score, and visualizes the confusion matrix as a heatmap, saving the results and figures for reporting purposes.*
