@@ -24,6 +24,13 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    - name: Create DVC pull directory
+      run: mkdir -p ../dvc_pull_directory
+    - name: Download and unzip file from Google Drive
+      run: |        
+        gdown --id 1GY0a_DOoJeKwlM2ffvq5au2X45jPN3H5
+        unzip remote.zip -d ../dvc_pull_directory
+        rm remote.zip
     # - name: Training
     #   run: |
     #     run the training code
