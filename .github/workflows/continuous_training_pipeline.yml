@@ -20,6 +20,18 @@ jobs:
       uses: actions/setup-python@v3
       with:
         python-version: "3.10"
+    - name: Download and unzip project files
+      run: |
+        mkdir -p project_folder
+        cd project_folder
+        curl -L -o dvc_remote.zip "https://drive.google.com/uc?export=download&id=1GY0a_DOoJeKwlM2ffvq5au2X45jPN3H5"
+        unzip dvc_remote.zip
+        rm dvc_remote.zip
+    - name: Set up DVC and pull data
+      run: |
+        python -m pip install dvc
+        cd project_folder/remla
+        dvc pull
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
