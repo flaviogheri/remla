@@ -31,9 +31,10 @@ jobs:
         gdown --id 1GY0a_DOoJeKwlM2ffvq5au2X45jPN3H5
         unzip remote.zip -d ../dvc_pull_directory
         rm remote.zip
-    # - name: Training
-    #   run: |
-    #     run the training code
+    - name: Set up DVC and pull data
+      run: |
+        python -m pip install dvc
+        dvc pull
     - name: Test
       run: |
         ./run_tests.sh
