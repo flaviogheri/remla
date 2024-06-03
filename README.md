@@ -111,3 +111,10 @@ Pylint gives a quality score. 10/10 is the best possible score.
 flake8 gives the number of issues. 0 is the best possible score.
 
 New pylint checkers have also been added according to common ML smells. These can be found in src/checkers.
+
+# Run automatic tests locally
+
+Automatic tests are run by executing the shell script run_tests.sh. This can be done with the command
+```
+./run_tests.sh
+```
