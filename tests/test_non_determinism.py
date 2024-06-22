@@ -2,12 +2,16 @@ import pytest
 import numpy as np
 from src.models import train_model
 import remlapreprocesspy
+import tensorflow as tf
 
 # Test non-determininsm when training using settings within testing_config.yml
 def test_non_determininsm_robustness():
-    np.random.seed(19)
+    tf.keras.utils.set_random_seed(1)
+    tf.config.experimental.enable_op_determinism()
+
     model_1 = train_model.return_model_directly(config_file_path="testing_config.yml")
-    np.random.seed(19)
+    
+    tf.keras.utils.set_random_seed(1)
     model_2 = train_model.return_model_directly(config_file_path="testing_config.yml")
 
     processed = remlapreprocesspy.preprocess("http://www.testurl.org")
