@@ -9,8 +9,11 @@ import yaml
 import src.models.model_definition as model_definition
 import os
 import time
+import tensorflow as tf
 
 if __name__ == "__main__":
+    tf.keras.utils.set_random_seed(1)
+    tf.config.experimental.enable_op_determinism()
 
     path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     project_directory = os.path.dirname(path)
@@ -62,6 +65,8 @@ if __name__ == "__main__":
     print(f"Training completed in {minutes}:{seconds}")
 
 def return_model_directly(config_file_path,slice_amount = 0.01):
+    tf.keras.utils.set_random_seed(1)
+    tf.config.experimental.enable_op_determinism()
     path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     project_directory = os.path.dirname(path)
     
