@@ -6,6 +6,10 @@ The model is a Convolutional Neural Network (CNN) with multiple Conv1D layers.
 # src/models/model_definition.py
 
 import os
+import tensorflow as tf
+# print(tf.__version__)
+# import keras 
+# print (keras.__version__)
 
 from keras.api.models import Sequential
 from keras.api.layers import Embedding, Conv1D, MaxPooling1D, Flatten, Dense, Dropout

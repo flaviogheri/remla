@@ -6,7 +6,8 @@ The model is saved in the models directory.
 import os
 import numpy as np
 import yaml
-import src.models.model_definition as model_definition
+# import src.models.model_definition as model_definition
+import model_definition
 import os
 import time
 
