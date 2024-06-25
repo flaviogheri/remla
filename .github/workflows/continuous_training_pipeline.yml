@@ -1,0 +1,40 @@
+name: Continuous Training Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v3
+      with:
+        python-version: "3.10"
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    - name: Create DVC pull directory
+      run: mkdir -p ../remote
+    - name: Download and unzip file from Google Drive
+      run: |        
+        gdown --id 1dZse5BAIgpe1UPU4w9-3OAdplTIP34_C -O remote.zip
+        unzip remote.zip -d ../
+        rm remote.zip
+    - name: Set up DVC and pull data
+      run: |
+        python -m pip install dvc
+        dvc pull
+    - name: Test
+      run: |
+        ./run_tests.sh

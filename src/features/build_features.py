@@ -5,8 +5,10 @@ This file is used to preprocess the data before training the model.
 import os
 
 from sklearn.preprocessing import LabelEncoder
-from keras.api.preprocessing.sequence import pad_sequences
-from keras._tf_keras.keras.preprocessing.text import Tokenizer
+from keras.api.preprocessing.sequence import pad_sequences  \
+    # pylint: disable=import-error, no-name-in-module
+from keras._tf_keras.keras.preprocessing.text import Tokenizer  \
+    # pylint: disable=import-error, no-name-in-module
 
 import yaml
 import numpy as np
@@ -16,7 +18,7 @@ path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 project_directory = os.path.dirname(path)
 config_file = os.path.join(project_directory, "config.yml")
 
-with open(config_file, "r") as file:
+with open(config_file, "r", encoding="utf-8") as file:
     config = yaml.safe_load(file)
 
 training_path = config['data_paths']['training_file']
@@ -24,15 +26,15 @@ test_path = config['data_paths']['test_file']
 val_path = config['data_paths']['val_file']
 
 # Load train data
-with open(training_path, "r") as train_file:
+with open(training_path, "r", encoding="utf-8") as train_file:
     train = [line.strip() for line in train_file.readlines()[1:]]
 
 # Load test data
-with open(test_path, "r") as test_file:
+with open(test_path, "r", encoding="utf-8") as test_file:
     test = [line.strip() for line in test_file.readlines()]
 
 # Load validation data
-with open(val_path, "r") as val_file:
+with open(val_path, "r", encoding="utf-8") as val_file:
     val = [line.strip() for line in val_file.readlines()]
 
 # Preprocess data
@@ -54,7 +56,7 @@ char_index = tokenizer.word_index
 char_index_size = len(char_index)
 config['params']['char_index_size'] = char_index_size
 
-with open(config_file, "w") as file:
+with open(config_file, "w", encoding="utf-8") as file:
     yaml.dump(config, file, default_flow_style=False)
 
 sequence_length = config['params']['sequence_length']

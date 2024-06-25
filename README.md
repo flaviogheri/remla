@@ -5,42 +5,49 @@ development of pipeline management and model_training system
 # development of pipeline management and model_training system
 
 ### How to run:
-**Step 1:** 
+
+**Step 1:**
 
 Download and unzip all files to a folder of your choice.
 Also download and unzip the project dvc remote repository from [DRIVE](https://drive.google.com/file/d/1GY0a_DOoJeKwlM2ffvq5au2X45jPN3H5/view?usp=drive_link). Store the remote directory in the same folder as the remla folder, and import the training/testing/evaluation data using `dvc pull` from within the remla folder.
 **Step 2:**
 
-*Option 1:*
+_Option 1:_
 
-Open folder "src". Open __init with a python editor and run the file. This will give you printed updates in your shell.
+Open folder "src". Open \_\_init with a python editor and run the file. This will give you printed updates in your shell.
 
-*Option 2:*
+_Option 2:_
 
-Open folder "src" and run __init. This will run the file in a command terminal.
+Open folder "src" and run \_\_init. This will run the file in a command terminal.
 
-
-**Step 3:** 
-Analyze results in *../remla/reports* and *../remla/reports/figures*
+**Step 3:**
+Analyze results in _../remla/reports_ and _../remla/reports/figures_
 
 ### Content:
-# build_features.py
-*This script loads text data from files specified in a YAML configuration file or through direct file paths, preprocesses the data by tokenizing and padding sequences, encodes labels, and then saves the processed data into numpy arrays.*
 
-# train_model.py
-*This script loads data, builds and trains the phishing detection model using a neural network defined in model_definition, and then saves the trained model.*
+# build_features.py
+
+_This script loads text data from files specified in a YAML configuration file or through direct file paths, preprocesses the data by tokenizing and padding sequences, encodes labels, and then saves the processed data into numpy arrays._
 
 # model_definition.py
-*This script defines a function build_model that constructs a convolutional neural network (CNN) model for text classification using Keras. The architecture includes several convolutional layers with different kernel sizes, max pooling layers, dropout layers, and a final dense layer for classification. The model is configured based on parameters loaded from a YAML configuration file.*
+
+_This script defines a function build_model that constructs a convolutional neural network (CNN) model for text classification using Keras. The architecture includes several convolutional layers with different kernel sizes, max pooling layers, dropout layers, and a final dense layer for classification. The model is configured based on parameters loaded from a YAML configuration file._
+
+# train_model.py
+
+_This script loads data, builds and trains the phishing detection model using a neural network defined in model_definition, and then saves the trained model._
 
 # predict_model.py
-*This script loads a trained neural network model for phishing detection, evaluates its performance on test data, generates a classification report, confusion matrix, and accuracy score, and visualizes the confusion matrix as a heatmap, saving the results and figures for reporting purposes.*
+
+_This script loads a trained neural network model for phishing detection, evaluates its performance on test data, generates a classification report, confusion matrix, and accuracy score, and visualizes the confusion matrix as a heatmap, saving the results and figures for reporting purposes._
 
 # make_dataset.py
-*This script creates and downloads the dataset from a cloud service. Due to our DVC setup currently not in use*
+
+_This script creates and downloads the dataset from a cloud service. Due to our DVC setup currently not in use_
 
 # Project Organization
-------------
+
+---
 
     ├── LICENSE
     ├── Makefile           <- Makefile with commands like `make data` or `make train`
@@ -104,3 +111,10 @@ Pylint gives a quality score. 10/10 is the best possible score.
 flake8 gives the number of issues. 0 is the best possible score.
 
 New pylint checkers have also been added according to common ML smells. These can be found in src/checkers.
+
+# Run automatic tests locally
+
+Automatic tests are run by executing the shell script run_tests.sh. This can be done with the command
+```
+./run_tests.sh
+```
