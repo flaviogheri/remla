@@ -1,6 +1,4 @@
-************* Module models.train_model
-src\models\train_model.py:73:4: E1101: Module 'tensorflow' has no 'keras' member (no-member)
 
-------------------------------------------------------------------
-Your code has been rated at 9.83/10 (previous run: 9.83/10, +0.00)
+--------------------------------------------------------------------
+Your code has been rated at 10.00/10 (previous run: 10.00/10, +0.00)
 

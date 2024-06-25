@@ -8,7 +8,9 @@ import time
 import numpy as np
 import yaml
 import tensorflow as tf
-from src.models import model_definition
+# import model_definition
+from src.models import model_definition # pylint: disable=import-error
+
 
 if __name__ == "__main__":
     tf.keras.utils.set_random_seed(1)
@@ -21,7 +23,7 @@ if __name__ == "__main__":
 
     # Load parameters and data
     config_file_path = os.path.join(project_directory, "config.yml")
-    with open(config_file_path, "r") as file:
+    with open(config_file_path, "r", encoding="utf-8") as file:
         config = yaml.safe_load(file)
 
     params = config['params']
@@ -74,7 +76,7 @@ def return_model_directly(config_path, slice_amount=0.01):
     tf.config.experimental.enable_op_determinism()
 
     # Load parameters and data
-    with open(config_path, "r") as config_file:
+    with open(config_path, "r", encoding="utf-8") as config_file:
         configuration = yaml.safe_load(config_file)
 
     parameters = configuration['params']

@@ -12,7 +12,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
-from keras.api.models import load_model
+from keras.api.models import load_model  # pylint: disable=import-error, no-name-in-module
 
 path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -20,7 +20,7 @@ path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 project_directory = os.path.dirname(path)
 config_file = os.path.join(project_directory, "config.yml")
 # print(config_file)
-with open(config_file, "r") as file:
+with open(config_file, "r", encoding="utf-8") as file:
     config = yaml.safe_load(file)
 
 
@@ -36,7 +36,7 @@ y_test = y_test.reshape(-1, 1)
 
 # Load the trained model
 model_path = config["processed_paths"]["model_path"]
-model = load_model(model_path)
+model = load_model(model_path) # type: ignore
 
 # Generate predictions
 y_pred = model.predict(x_test, batch_size=1000)
@@ -46,7 +46,7 @@ y_pred_binary = (np.array(y_pred) > 0.5).astype(int)
 
 report = classification_report(y_test, y_pred_binary)
 
-with open(config["report_paths"]["classification_report"], "w") as file:
+with open(config["report_paths"]["classification_report"], "w", encoding="utf-8") as file:
     file.write("Classification Report:\n")
     file.write(report)
 
@@ -54,14 +54,14 @@ with open(config["report_paths"]["classification_report"], "w") as file:
 # Calculate the confusion matrix
 confusion_mat = confusion_matrix(y_test, y_pred_binary)
 
-with open(config["report_paths"]["confusion_matrix"], "w") as file:
+with open(config["report_paths"]["confusion_matrix"], "w", encoding="utf-8") as file:
     file.write("Confusion Matrix:\n")
     file.write(np.array_str(confusion_mat))
 
 # Save accuracy to a file
 accuracy = accuracy_score(y_test, y_pred_binary)
 
-with open(config["report_paths"]["accuracy_score"], "w") as file:
+with open(config["report_paths"]["accuracy_score"], "w", encoding="utf-8") as file:
     file.write(f"Accuracy: {accuracy}")
 
 # Visualize the confusion matrix using a heatmap
