@@ -7,8 +7,9 @@ The model is a Convolutional Neural Network (CNN) with multiple Conv1D layers.
 
 import os
 
-from keras.api.models import Sequential # pylint: disable=import-error, no-name-in-module
-from keras.api.layers import Embedding, Conv1D, MaxPooling1D, Flatten, Dense, Dropout # pylint: disable=import-error, no-name-in-module
+from keras.api.models import Sequential  # pylint: disable=import-error, no-name-in-module
+from keras.api.layers import Embedding, Conv1D, MaxPooling1D, Flatten, Dense, Dropout  \
+    # pylint: disable=import-error, no-name-in-module
 
 import yaml
 

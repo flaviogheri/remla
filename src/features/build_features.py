@@ -5,8 +5,10 @@ This file is used to preprocess the data before training the model.
 import os
 
 from sklearn.preprocessing import LabelEncoder
-from keras.api.preprocessing.sequence import pad_sequences # pylint: disable=import-error, no-name-in-module
-from keras._tf_keras.keras.preprocessing.text import Tokenizer # pylint: disable=import-error, no-name-in-module
+from keras.api.preprocessing.sequence import pad_sequences  \
+    # pylint: disable=import-error, no-name-in-module
+from keras._tf_keras.keras.preprocessing.text import Tokenizer  \
+    # pylint: disable=import-error, no-name-in-module
 
 import yaml
 import numpy as np

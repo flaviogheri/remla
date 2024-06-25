@@ -9,7 +9,7 @@ import numpy as np
 import yaml
 import tensorflow as tf
 # import model_definition
-from src.models import model_definition # pylint: disable=import-error
+from src.models import model_definition  # pylint: disable=import-error
 
 
 if __name__ == "__main__":

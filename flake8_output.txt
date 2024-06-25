@@ -1,9 +1,0 @@
-./src/features/build_features.py:8:59: E261 at least two spaces before inline comment
-./src/features/build_features.py:8:101: E501 line too long (108 > 100 characters)
-./src/features/build_features.py:9:63: E261 at least two spaces before inline comment
-./src/features/build_features.py:9:101: E501 line too long (112 > 100 characters)
-./src/models/model_definition.py:10:40: E261 at least two spaces before inline comment
-./src/models/model_definition.py:11:86: E261 at least two spaces before inline comment
-./src/models/model_definition.py:11:101: E501 line too long (135 > 100 characters)
-./src/models/predict_model.py:39:31: E261 at least two spaces before inline comment
-./src/models/train_model.py:12:40: E261 at least two spaces before inline comment

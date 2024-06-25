@@ -36,7 +36,7 @@ y_test = y_test.reshape(-1, 1)
 
 # Load the trained model
 model_path = config["processed_paths"]["model_path"]
-model = load_model(model_path) # type: ignore
+model = load_model(model_path)  # type: ignore
 
 # Generate predictions
 y_pred = model.predict(x_test, batch_size=1000)
