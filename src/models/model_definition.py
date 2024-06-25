@@ -7,15 +7,16 @@ The model is a Convolutional Neural Network (CNN) with multiple Conv1D layers.
 
 import os
 
-from keras.api.models import Sequential
-from keras.api.layers import Embedding, Conv1D, MaxPooling1D, Flatten, Dense, Dropout
+from keras.api.models import Sequential  # pylint: disable=import-error, no-name-in-module
+from keras.api.layers import Embedding, Conv1D, MaxPooling1D, Flatten, Dense, Dropout  \
+    # pylint: disable=import-error, no-name-in-module
 
 import yaml
 
 project_directory = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 config_file = os.path.join(project_directory, "config.yml")
 # print(config_file)
-with open(config_file, "r") as file:
+with open(config_file, "r", encoding="utf-8") as file:
     config = yaml.safe_load(file)
 params = config['params']
 

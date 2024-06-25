@@ -2,13 +2,9 @@ import pytest
 import os
 import yaml
 import numpy as np
-import seaborn as sns
-import matplotlib.pyplot as plt
 from keras.api.models import load_model
-import pandas as pd
-from remlapreprocesspy import preprocess
-from sklearn.metrics import classification_report, confusion_matrix, accuracy_score, f1_score, recall_score
-from keras.api.models import load_model
+from sklearn.metrics import accuracy_score, f1_score, recall_score
+
 
 @pytest.fixture
 def load_test_data_and_model():
@@ -18,7 +14,7 @@ def load_test_data_and_model():
     # Load parameters and data
     project_directory = os.path.dirname(path) + "/model-training/"
     config_file = os.path.join(project_directory, "config.yml")
-    
+
     with open(config_file, "r") as file:
         config = yaml.safe_load(file)
 
@@ -35,11 +31,12 @@ def load_test_data_and_model():
     model_path = config["processed_paths"]["model_path"]
     model = load_model(model_path)
 
-    return x_test,y_test,model
+    return x_test, y_test, model
+
 
 def test_model_performance(load_test_data_and_model):
     # Generate predictions
-    x_test,y_test,model = load_test_data_and_model
+    x_test, y_test, model = load_test_data_and_model
     y_pred = model.predict(x_test, batch_size=1000)
 
     # Convert predicted probabilities to binary labels
@@ -53,9 +50,8 @@ def test_model_performance(load_test_data_and_model):
     # Save accuracy to a file
     accuracy = accuracy_score(y_test, y_pred_binary)
     recall = recall_score(y_test, y_pred_binary)
-    f1 = f1_score(y_test,y_pred_binary)
-    
+    f1 = f1_score(y_test, y_pred_binary)
+
     assert accuracy > 0.6, "Model accuracy is below 0.9"
     assert recall > 0.6, "Model recall is below 0.9"
     assert f1 > 0.6, "Model f1 score is below 0.9"
-
