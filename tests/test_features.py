@@ -6,12 +6,14 @@ import pytest
 def load_data():
     # Load the configuration file
     path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    project_directory = os.path.dirname(path)
+
+    # Load parameters and data
+    project_directory = os.path.dirname(path) + "/model-training/"
     config_file = os.path.join(project_directory, "config.yml")
 
-    with open(config_file, "r", encoding="utf-8") as file:
+    with open(config_file, "r") as file:
         config = yaml.safe_load(file)
-
+        
     training_path = config['data_paths']['training_file']
     test_path = config['data_paths']['test_file']
     val_path = config['data_paths']['val_file']
