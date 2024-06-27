@@ -1,27 +1,32 @@
 # ml_config_management
 
-development of pipeline management and model_training system
+This GitHub repo is for developing, experimenting on and releasing new models for the `model-service`.
 
-# development of pipeline management and model_training system
-
-### How to run:
+# How to run the training pipeline:
 
 **Step 1:**
 
-Download and unzip all files to a folder of your choice.
-Also download and unzip the project dvc remote repository from [DRIVE](https://drive.google.com/file/d/1GY0a_DOoJeKwlM2ffvq5au2X45jPN3H5/view?usp=drive_link). Store the remote directory in the same folder as the remla folder, and import the training/testing/evaluation data using `dvc pull` from within the remla folder.
+Clone the repository through `git clone git@github.com:remla24-team-1/model-training.git`
+Also download and unzip the project [dvc remote repository](https://drive.google.com/file/d/1GY0a_DOoJeKwlM2ffvq5au2X45jPN3H5/view?usp=drive_link). Store the remote directory in the same folder as the model-training folder, and import the training/testing/evaluation data using `dvc pull` from within the remla folder.
+
 **Step 2:**
+
+For all run setups, the `config.yml` file contains settings that control different parts of the pipeline. Modify the variables to what you wish to test. There is also a seperate `testing_config.yml` file specifically for the automatic tests, that for example performs the training step faster.
 
 _Option 1:_
 
-Open folder "src". Open \_\_init with a python editor and run the file. This will give you printed updates in your shell.
+Run the entire pipeline through dvc using `dvc repro` from the model-training folder.
 
 _Option 2:_
+
+Open folder "src". Open \_\_init with a python editor and run the file. This will give you printed updates in your shell.
+
+_Option 3:_
 
 Open folder "src" and run \_\_init. This will run the file in a command terminal.
 
 **Step 3:**
-Analyze results in _../remla/reports_ and _../remla/reports/figures_
+Analyze results in _../model-trainig/reports_ and _../model-training/reports/figures_
 
 ### Content:
 
@@ -74,6 +79,7 @@ _This script creates and downloads the dataset from a cloud service. Due to our 
     ├── requirements.txt   <- The requirements file for reproducing the analysis environment, e.g.
     │                         generated with `pip freeze > requirements.txt`
     │
+    ├── run_tests.sh       <- Shell script for automatic tests
     ├── setup.py           <- makes project pip installable (pip install -e .) so src can be imported
     ├── src                <- Source code for use in this project.
     │   ├── __init__.py    <- Makes src a Python module
@@ -89,9 +95,10 @@ _This script creates and downloads the dataset from a cloud service. Due to our 
     │   │   ├── predict_model.py
     │   │   └── train_model.py
     │   │
-    │   └── visualization  <- Scripts to create exploratory and results oriented visualizations
+    │   └── visualization  <- Scripts to create exploratory and results-oriented visualizations
     │       └── visualize.py
     │
+    ├── tests              <- Folder containing the tests on the features, data and models
     └── tox.ini            <- tox file with settings for running tox; see tox.readthedocs.io
 
 ---
@@ -101,11 +108,11 @@ _This script creates and downloads the dataset from a cloud service. Due to our 
 # Running the linter
 
 Both pylint and flake8 have been used as linters. To run both, run the following command:
-lint.bat
+`lint.bat`
 
 If this does not work, you can run the following commands to run both linters separately:
 pylint src src/checkers > pylint_output.txt
-flake8 > flake8_output.txt
+`flake8 > flake8_output.txt`
 
 Pylint gives a quality score. 10/10 is the best possible score.
 flake8 gives the number of issues. 0 is the best possible score.
@@ -118,3 +125,7 @@ Automatic tests are run by executing the shell script run_tests.sh. This can be 
 ```
 ./run_tests.sh
 ```
+These same tests are also automatically ran on pushes / PR:s to main.
+
+# Update DVC remote 
+There is currently no cloud setup for the DVC remote. The remote has to be updated manually.
