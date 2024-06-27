@@ -1,6 +1,6 @@
 # ml_config_management
 
-This GitHub repo is for developing, experimenting on and releasing new models for the `model-service`.
+This GitHub repo is for developing, experimenting on and releasing new models for the [model-service](https://github.com/remla24-team-1/model-service/). It is versioned by [lib-ml](https://github.com/remla24-team-1/lib-ml/).
 
 # How to run the training pipeline:
 
