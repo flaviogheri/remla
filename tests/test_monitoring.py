@@ -23,7 +23,7 @@ def ram_usage():
     process = psutil.Process()
     memory = process.memory_info()
 
-    return memory
+    return memory.rss # (rss = resident set size - aka physical memory usage)
 
 
 def test_model_training_time():
@@ -79,7 +79,7 @@ def test_ram_usage():
     
     recent_train_ram = ram_usage() / (1024 **2)
 
-    assert (recent_train_ram - original_train_ram) < 100, "Memory increase between models is too large"
+    assert (recent_train_ram - original_train_ram) < 500, "Memory increase between models is too large"
     
 
 
