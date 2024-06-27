@@ -23,7 +23,7 @@ def ram_usage():
     process = psutil.Process()
     memory = process.memory_info()
 
-    return memory
+    return memory.rss # (rss = resident set size - aka physical memory usage)
 
 
 def test_model_training_time():
