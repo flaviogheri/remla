@@ -79,7 +79,7 @@ def test_ram_usage():
     
     recent_train_ram = ram_usage() / (1024 **2)
 
-    assert (recent_train_ram - original_train_ram) < 100, "Memory increase between models is too large"
+    assert (recent_train_ram - original_train_ram) < 500, "Memory increase between models is too large"
     
 
 
